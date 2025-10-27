@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   CdkDragDrop,
+  CdkDragStart,
+  CdkDragEnd,
   DragDropModule,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
@@ -11,9 +13,9 @@ import { Todo } from '../../core/models/todo.model';
 import { TodoService } from '../../core/services/todo.service';
 import { Observable } from 'rxjs';
 
-/** Extensão de visualização para permitir a flag de edição no template */
 interface TodoView extends Todo {
   __edit?: boolean;
+  __dragging?: boolean;
 }
 
 @Component({
@@ -24,18 +26,14 @@ interface TodoView extends Todo {
   styleUrls: ['./todo-page.component.scss'],
 })
 export class TodoPageComponent {
-  // público para evitar erro caso o template ainda referencie `svc`
   svc = inject(TodoService);
 
   newTitle = '';
   query = '';
   filter: 'all' | 'pending' | 'done' = 'all';
   sort: 'created' | 'priority' = 'created';
-
-  // fluxo de exibição vindo do serviço (pode ser usado como Observable<Todo[]>)
   todos$: Observable<TodoView[]> = this.svc.view$ as Observable<TodoView[]>;
 
-  /** ===== Ações básicas ===== */
   add() {
     const t = this.newTitle.trim();
     if (!t) return;
@@ -60,18 +58,23 @@ export class TodoPageComponent {
     this.svc.clearCompleted().subscribe();
   }
 
-  /** ===== Drag & Drop / Reordenação ===== */
   drop(ev: CdkDragDrop<TodoView[]>, list: TodoView[]) {
     moveItemInArray(list, ev.previousIndex, ev.currentIndex);
     this.svc.reorder(list.map((x) => x.id)).subscribe();
   }
 
-  /** ===== TrackBy para *ngFor (evita arrow function no template) ===== */
-  trackById(index: number, item: TodoView) {
+  onDragStart(item: TodoView) {
+    item.__dragging = true;
+  }
+
+  onDragEnd(item: TodoView) {
+    item.__dragging = false;
+  }
+
+  trackById(_: number, item: TodoView) {
     return item.id;
   }
 
-  /** ===== Edição inline segura (sem acessar svc no template) ===== */
   toggleEdit(t: TodoView) {
     t.__edit = !t.__edit;
   }

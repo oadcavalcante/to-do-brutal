@@ -1,16 +1,14 @@
 <div class="container stack">
-  <header class="card" style="text-align: center">
-    <h1 style="margin: 0; font-size: var(--fs-xl)">LISTA DE TAREFAS</h1>
-    <div style="color: var(--clr-muted)">
-      Angular • Design System Brutalista
-    </div>
+  <header class="card header-center">
+    <h1>LISTA DE TAREFAS</h1>
+    <div class="subtitle">Angular • Design System Brutalista</div>
   </header>
 
   <!-- Entrada -->
   <section class="card">
-    <div class="row">
+    <div class="row wrap">
       <input
-        class="input"
+        class="input flex-grow"
         placeholder="Adicione uma tarefa..."
         [(ngModel)]="newTitle"
         (keyup.enter)="add()"
@@ -21,10 +19,9 @@
 
   <!-- Filtros -->
   <section class="card">
-    <div class="row">
+    <div class="row wrap gap">
       <input
-        class="input"
-        style="max-width: 420px"
+        class="input flex-grow"
         placeholder="Buscar..."
         [(ngModel)]="query"
         (input)="apply()"
@@ -49,7 +46,8 @@
     <div
       class="card"
       cdkDropList
-      (cdkDropListDropped)="drop($event, list)"
+      [cdkDropListDisabled]="sort === 'created'"
+      (cdkDropListDropped)="sort === 'created' ? null : drop($event, list)"
       *ngIf="todos$ | async as list"
     >
       <div class="stack" *ngIf="list.length; else empty">
@@ -57,9 +55,20 @@
           class="todo"
           *ngFor="let t of list; trackBy: trackById"
           cdkDrag
+          (cdkDragStarted)="onDragStart(t)"
+          (cdkDragEnded)="onDragEnd(t)"
           [class.todo--done]="t.status === 'DONE'"
+          [class.todo--dragging]="t.__dragging"
         >
           <div class="row">
+            <div
+              *ngIf="sort !== 'created'"
+              class="drag-handle"
+              cdkDragHandle
+              title="Arrastar"
+            >
+              ☰
+            </div>
             <input
               #chk
               class="checkbox"
@@ -77,12 +86,12 @@
 
         <!-- editor inline -->
         <div
-          class="card"
+          class="card edit-card"
           *ngFor="let t of list; trackBy: trackById"
           [hidden]="!t.__edit"
         >
-          <div class="row">
-            <input class="input" [(ngModel)]="t.title" />
+          <div class="row wrap">
+            <input class="input flex-grow" [(ngModel)]="t.title" />
             <button
               class="btn btn--success"
               (click)="onToggle(t.id, t.status === 'PENDING')"
@@ -95,9 +104,7 @@
       </div>
 
       <ng-template #empty>
-        <div style="text-align: center; color: var(--clr-muted)">
-          Sem tarefas por aqui… adicione a primeira! 🚀
-        </div>
+        <div class="empty">Sem tarefas por aqui… adicione a primeira! 🚀</div>
       </ng-template>
     </div>
   </section>
