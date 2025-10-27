@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -25,14 +25,27 @@ interface TodoView extends Todo {
   templateUrl: './todo-page.component.html',
   styleUrls: ['./todo-page.component.scss'],
 })
-export class TodoPageComponent {
+export class TodoPageComponent implements OnInit {
   svc = inject(TodoService);
 
   newTitle = '';
   query = '';
   filter: 'all' | 'pending' | 'done' = 'all';
+
   sort: 'created' | 'priority' = 'created';
   todos$: Observable<TodoView[]> = this.svc.view$ as Observable<TodoView[]>;
+  theme: 'light' | 'dark' =
+    (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
+
+  ngOnInit() {
+    document.documentElement.setAttribute('data-theme', this.theme);
+  }
+
+  toggleTheme() {
+    this.theme = this.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', this.theme);
+    localStorage.setItem('theme', this.theme);
+  }
 
   add() {
     const t = this.newTitle.trim();

@@ -38,11 +38,17 @@
 /* tema escuro */
 :root[data-theme="dark"] {
   --clr-bg: #0f1115;
-  --clr-surface: #222;
-  --clr-surface-alt: #17351a;
+  --clr-surface: #1a1a1a;
+  --clr-surface-alt: #223322;
   --clr-text: #f5f5f5;
+  --clr-primary: #fff;
   --clr-accent: #ffd600;
-  --clr-muted: #bbb;
+  --clr-success: #00e676;
+  --clr-danger: #ef5350;
+  --clr-warning: #ffa726;
+  --clr-muted: #aaa;
+
+  --shadow: 3px 3px 0 #fff;
 }
 
 /* -------- RESET RÁPIDO -------- */

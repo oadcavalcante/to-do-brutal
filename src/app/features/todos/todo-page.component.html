@@ -1,6 +1,18 @@
 <div class="container stack">
-  <header class="card header-center">
-    <h1>LISTA DE TAREFAS</h1>
+  <header class="card header-brutal">
+    <div class="header-content">
+      <h1 class="title">LISTA DE TAREFAS</h1>
+      <button
+        class="toggle-theme"
+        (click)="toggleTheme()"
+        [attr.aria-label]="
+          theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'
+        "
+      >
+        <span class="icon">{{ theme === "light" ? "🌙" : "☀️" }}</span>
+        <span class="label">{{ theme === "light" ? "Dark" : "Light" }}</span>
+      </button>
+    </div>
     <div class="subtitle">Angular • Design System Brutalista</div>
   </header>
 
