@@ -1,1 +1,168 @@
 /* You can add global styles to this file, and also import other style files */
+/* -------- DESIGN TOKENS -------- */
+:root {
+  /* cores base (tema claro) */
+  --clr-bg: #ffffff;
+  --clr-surface: #fff9c4; /* amarelo pastel */
+  --clr-surface-alt: #c8e6c9; /* verde claro */
+  --clr-text: #111;
+  --clr-primary: #111; /* preto p/ contorno e texto forte */
+  --clr-accent: #ffd600; /* amarelo */
+  --clr-success: #00c853; /* verde vivo */
+  --clr-danger: #e53935; /* vermelho */
+  --clr-warning: #ffb300; /* laranja */
+  --clr-muted: #666;
+
+  /* tipografia */
+  --font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+
+  /* espaçamentos/raios */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --radius: 0.25rem;
+
+  /* “brutalismo”: contorno grosso + sombra chapada */
+  --border-w: 3px;
+  --shadow: 3px 3px 0 #000;
+}
+
+/* tema escuro */
+:root[data-theme="dark"] {
+  --clr-bg: #0f1115;
+  --clr-surface: #222;
+  --clr-surface-alt: #17351a;
+  --clr-text: #f5f5f5;
+  --clr-accent: #ffd600;
+  --clr-muted: #bbb;
+}
+
+/* -------- RESET RÁPIDO -------- */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-family);
+  line-height: 1.4;
+}
+
+/* -------- UTILITÁRIOS -------- */
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-4);
+}
+.stack > * + * {
+  margin-top: var(--sp-4);
+}
+.row {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+}
+.card {
+  background: var(--clr-surface);
+  padding: var(--sp-4);
+  border: var(--border-w) solid #000;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* -------- CONTROLES (DS) -------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: var(--border-w) solid #000;
+  border-radius: var(--radius);
+  background: var(--clr-accent);
+  color: #000;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.btn:is(:hover, :focus) {
+  transform: translateY(-1px);
+}
+.btn--success {
+  background: var(--clr-success);
+  color: #fff;
+}
+.btn--danger {
+  background: var(--clr-danger);
+  color: #fff;
+}
+.btn--ghost {
+  background: #fff;
+}
+.btn--block {
+  width: 100%;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font-size: var(--fs-md);
+  border: var(--border-w) solid #000;
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.checkbox {
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+  accent-color: #000;
+  border: var(--border-w) solid #000;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border: var(--border-w) solid #000;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+/* Lista “brutal” */
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.75rem;
+  border: var(--border-w) solid #000;
+  border-radius: var(--radius);
+  background: var(--clr-surface-alt);
+  box-shadow: var(--shadow);
+}
+.todo--done {
+  background: #a5d6a7;
+  text-decoration: line-through;
+  color: #0b3d0b;
+}
+.todo__title {
+  font-weight: 700;
+}
+.todo__actions {
+  display: flex;
+  gap: 0.4rem;
+}
