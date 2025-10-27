@@ -1,0 +1,104 @@
+<div class="container stack">
+  <header class="card" style="text-align: center">
+    <h1 style="margin: 0; font-size: var(--fs-xl)">LISTA DE TAREFAS</h1>
+    <div style="color: var(--clr-muted)">
+      Angular • Design System Brutalista
+    </div>
+  </header>
+
+  <!-- Entrada -->
+  <section class="card">
+    <div class="row">
+      <input
+        class="input"
+        placeholder="Adicione uma tarefa..."
+        [(ngModel)]="newTitle"
+        (keyup.enter)="add()"
+      />
+      <button class="btn" (click)="add()">+ Add</button>
+    </div>
+  </section>
+
+  <!-- Filtros -->
+  <section class="card">
+    <div class="row">
+      <input
+        class="input"
+        style="max-width: 420px"
+        placeholder="Buscar..."
+        [(ngModel)]="query"
+        (input)="apply()"
+      />
+      <select class="select" [(ngModel)]="filter" (change)="apply()">
+        <option value="all">Todas</option>
+        <option value="pending">Pendentes</option>
+        <option value="done">Concluídas</option>
+      </select>
+      <select class="select" [(ngModel)]="sort" (change)="apply()">
+        <option value="created">Criação</option>
+        <option value="priority">Prioridade</option>
+      </select>
+      <button class="btn btn--danger" (click)="clearCompleted()">
+        Limpar Concluídas
+      </button>
+    </div>
+  </section>
+
+  <!-- Lista -->
+  <section class="stack">
+    <div
+      class="card"
+      cdkDropList
+      (cdkDropListDropped)="drop($event, list)"
+      *ngIf="todos$ | async as list"
+    >
+      <div class="stack" *ngIf="list.length; else empty">
+        <div
+          class="todo"
+          *ngFor="let t of list; trackBy: trackById"
+          cdkDrag
+          [class.todo--done]="t.status === 'DONE'"
+        >
+          <div class="row">
+            <input
+              #chk
+              class="checkbox"
+              type="checkbox"
+              [checked]="t.status === 'DONE'"
+              (change)="onToggle(t.id, chk.checked)"
+            />
+            <span class="todo__title">{{ t.title }}</span>
+          </div>
+          <div class="todo__actions">
+            <button class="btn btn--ghost" (click)="toggleEdit(t)">✏️</button>
+            <button class="btn btn--danger" (click)="onRemove(t.id)">🗑</button>
+          </div>
+        </div>
+
+        <!-- editor inline -->
+        <div
+          class="card"
+          *ngFor="let t of list; trackBy: trackById"
+          [hidden]="!t.__edit"
+        >
+          <div class="row">
+            <input class="input" [(ngModel)]="t.title" />
+            <button
+              class="btn btn--success"
+              (click)="onToggle(t.id, t.status === 'PENDING')"
+            >
+              Alternar
+            </button>
+            <button class="btn" (click)="saveEdit(t)">Salvar</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #empty>
+        <div style="text-align: center; color: var(--clr-muted)">
+          Sem tarefas por aqui… adicione a primeira! 🚀
+        </div>
+      </ng-template>
+    </div>
+  </section>
+</div>
