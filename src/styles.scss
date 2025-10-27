@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===========================
+   🎨 DESIGN SYSTEM BRUTALISTA
+   =========================== */
+
 /* -------- DESIGN TOKENS -------- */
 :root {
   /* cores base (tema claro) */
@@ -6,11 +9,11 @@
   --clr-surface: #fff9c4; /* amarelo pastel */
   --clr-surface-alt: #c8e6c9; /* verde claro */
   --clr-text: #111;
-  --clr-primary: #111; /* preto p/ contorno e texto forte */
-  --clr-accent: #ffd600; /* amarelo */
-  --clr-success: #00c853; /* verde vivo */
-  --clr-danger: #e53935; /* vermelho */
-  --clr-warning: #ffb300; /* laranja */
+  --clr-primary: #111;
+  --clr-accent: #ffd600;
+  --clr-success: #00c853;
+  --clr-danger: #e53935;
+  --clr-warning: #ffb300;
   --clr-muted: #666;
 
   /* tipografia */
@@ -22,7 +25,7 @@
   --fs-lg: 1.25rem;
   --fs-xl: 1.5rem;
 
-  /* espaçamentos/raios */
+  /* espaçamentos e bordas */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
   --sp-3: 0.75rem;
@@ -30,12 +33,12 @@
   --sp-6: 1.5rem;
   --radius: 0.25rem;
 
-  /* “brutalismo”: contorno grosso + sombra chapada */
+  /* brutalismo: contorno + sombra */
   --border-w: 3px;
   --shadow: 3px 3px 0 #000;
 }
 
-/* tema escuro */
+/* -------- TEMA ESCURO -------- */
 :root[data-theme="dark"] {
   --clr-bg: #0f1115;
   --clr-surface: #1a1a1a;
@@ -47,21 +50,21 @@
   --clr-danger: #ef5350;
   --clr-warning: #ffa726;
   --clr-muted: #aaa;
-
   --shadow: 3px 3px 0 #fff;
 }
 
-/* -------- RESET RÁPIDO -------- */
+/* ===========================
+   🧼 RESET E BASE GLOBAL
+   =========================== */
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
+
 html,
 body {
   height: 100%;
-}
-body {
   margin: 0;
   background: var(--clr-bg);
   color: var(--clr-text);
@@ -70,111 +73,265 @@ body {
 }
 
 button {
-  touch-action: manipulation; /* evita zoom e gestos duplos */
+  touch-action: manipulation; /* evita zoom duplo no mobile */
+  font-family: inherit;
 }
 
-/* -------- UTILITÁRIOS -------- */
+/* ===========================
+   🧱 UTILITÁRIOS
+   =========================== */
 .container {
   max-width: 920px;
   margin: 0 auto;
   padding: var(--sp-6) var(--sp-4);
 }
+
 .stack > * + * {
   margin-top: var(--sp-4);
 }
+
 .row {
   display: flex;
   gap: var(--sp-3);
   align-items: center;
 }
+
+.row.wrap {
+  flex-wrap: wrap;
+}
+
+.flex-grow {
+  flex: 1;
+  min-width: 200px;
+}
+
 .card {
   background: var(--clr-surface);
   padding: var(--sp-4);
-  border: var(--border-w) solid #000;
+  border: var(--border-w) solid var(--clr-primary);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
-/* -------- CONTROLES (DS) -------- */
+/* ===========================
+   🎛️ CONTROLES E BOTÕES
+   =========================== */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.6rem 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
-  border: var(--border-w) solid #000;
+  border: var(--border-w) solid var(--clr-primary);
   border-radius: var(--radius);
   background: var(--clr-accent);
   color: #000;
   cursor: pointer;
   box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
 }
+
 .btn:is(:hover, :focus) {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
+
 .btn--success {
   background: var(--clr-success);
   color: #fff;
 }
+
 .btn--danger {
   background: var(--clr-danger);
   color: #fff;
 }
+
 .btn--ghost {
   background: #fff;
 }
+
 .btn--block {
   width: 100%;
 }
 
+/* ===========================
+   🧾 INPUTS / SELECTS
+   =========================== */
 .input,
 .select,
 .textarea {
   width: 100%;
   padding: 0.7rem 0.8rem;
   font-size: var(--fs-md);
-  border: var(--border-w) solid #000;
+  border: var(--border-w) solid var(--clr-primary);
   border-radius: var(--radius);
   background: #fff;
   box-shadow: var(--shadow);
+  color: var(--clr-text);
 }
 
+:root[data-theme="dark"] .input,
+:root[data-theme="dark"] .select,
+:root[data-theme="dark"] .textarea {
+  background: #111;
+  color: #fff;
+  border-color: #fff;
+}
+
+/* ===========================
+   ☑️ CHECKBOX
+   =========================== */
 .checkbox {
   inline-size: 1.15rem;
   block-size: 1.15rem;
   accent-color: #000;
-  border: var(--border-w) solid #000;
+  border: var(--border-w) solid var(--clr-primary);
 }
 
+/* ===========================
+   🏷️ TAGS
+   =========================== */
 .tag {
   display: inline-block;
   padding: 0.15rem 0.5rem;
-  border: var(--border-w) solid #000;
+  border: var(--border-w) solid var(--clr-primary);
   background: #fff;
   box-shadow: var(--shadow);
 }
 
-/* Lista “brutal” */
+/* ===========================
+   ✅ LISTA DE TAREFAS
+   =========================== */
 .todo {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.6rem 0.75rem;
-  border: var(--border-w) solid #000;
+  border: var(--border-w) solid var(--clr-primary);
   border-radius: var(--radius);
   background: var(--clr-surface-alt);
   box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
 }
+
 .todo--done {
   background: #a5d6a7;
   text-decoration: line-through;
   color: #0b3d0b;
 }
+
+/* tema escuro: concluídas visíveis */
+:root[data-theme="dark"] .todo--done {
+  background: #00c853; /* verde neon brutalista */
+  color: #111;
+  border-color: #fff;
+  box-shadow: 3px 3px 0 #fff;
+}
+
 .todo__title {
   font-weight: 700;
 }
+
 .todo__actions {
   display: flex;
   gap: 0.4rem;
+}
+
+/* drag handle */
+.drag-handle {
+  font-size: 1.2rem;
+  opacity: 0.6;
+  cursor: grab;
+  margin-right: 0.5rem;
+}
+
+.todo--dragging {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  cursor: grabbing;
+}
+
+/* ===========================
+   🕹️ HEADER E TEMA
+   =========================== */
+.header-brutal {
+  text-align: center;
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .header-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      flex: 1;
+      text-align: center;
+      font-size: var(--fs-xl);
+      margin: 0;
+    }
+  }
+
+  .subtitle {
+    color: var(--clr-muted);
+    margin-top: 0.5rem;
+  }
+}
+
+/* botão de alternância de tema */
+.toggle-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--clr-accent);
+  color: var(--clr-text);
+  border: var(--border-w) solid var(--clr-primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  transition: transform 0.15s ease;
+}
+
+.toggle-theme:hover {
+  transform: translateY(-2px);
+}
+
+.toggle-theme:active {
+  transform: translateY(1px);
+}
+
+/* modo escuro */
+[data-theme="dark"] .toggle-theme {
+  background: var(--clr-text);
+  color: var(--clr-bg);
+  border-color: var(--clr-text);
+}
+
+/* ===========================
+   📱 MOBILE FIXES
+   =========================== */
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .todo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .todo__actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }
