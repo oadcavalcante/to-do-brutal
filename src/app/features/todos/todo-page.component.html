@@ -59,17 +59,17 @@
       class="card"
       cdkDropList
       [cdkDropListDisabled]="sort === 'created'"
-      (cdkDropListDropped)="sort === 'created' ? null : drop($event, list)"
-      *ngIf="todos$ | async as list"
+      (cdkDropListDropped)="sort === 'created' ? null : drop($event)"
+      *ngIf="todos().length; else empty"
     >
-      <div class="stack" *ngIf="list.length; else empty">
+      <div class="stack">
         <div
           class="todo"
-          *ngFor="let t of list; trackBy: trackById"
+          *ngFor="let t of todos(); trackBy: trackById"
           cdkDrag
           (cdkDragStarted)="onDragStart(t)"
           (cdkDragEnded)="onDragEnd(t)"
-          [class.todo--done]="t.status === 'DONE'"
+          [class.todo--done]="t.done"
           [class.todo--dragging]="t.__dragging"
         >
           <div class="row">
@@ -85,11 +85,18 @@
               #chk
               class="checkbox"
               type="checkbox"
-              [checked]="t.status === 'DONE'"
+              [checked]="t.done"
               (change)="onToggle(t.id, chk.checked)"
             />
-            <span class="todo__title">{{ t.title }}</span>
+            <span
+              class="todo__title"
+              [class.todo__title--done]="t.done"
+              (dblclick)="toggleEdit(t)"
+            >
+              {{ t.title }}
+            </span>
           </div>
+
           <div class="todo__actions">
             <button class="btn btn--ghost" (click)="toggleEdit(t)">✏️</button>
             <button class="btn btn--danger" (click)="onRemove(t.id)">🗑</button>
@@ -99,25 +106,22 @@
         <!-- editor inline -->
         <div
           class="card edit-card"
-          *ngFor="let t of list; trackBy: trackById"
+          *ngFor="let t of todos(); trackBy: trackById"
           [hidden]="!t.__edit"
         >
           <div class="row wrap">
             <input class="input flex-grow" [(ngModel)]="t.title" />
-            <button
-              class="btn btn--success"
-              (click)="onToggle(t.id, t.status === 'PENDING')"
-            >
-              Alternar
+            <button class="btn btn--success" (click)="onToggle(t.id, !t.done)">
+              {{ t.done ? "Desfazer" : "Concluir" }}
             </button>
             <button class="btn" (click)="saveEdit(t)">Salvar</button>
           </div>
         </div>
       </div>
-
-      <ng-template #empty>
-        <div class="empty">Sem tarefas por aqui… adicione a primeira! 🚀</div>
-      </ng-template>
     </div>
+
+    <ng-template #empty>
+      <div class="empty">Sem tarefas por aqui… adicione a primeira! 🚀</div>
+    </ng-template>
   </section>
 </div>

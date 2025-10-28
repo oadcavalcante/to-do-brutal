@@ -1,86 +1,92 @@
-import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { Injectable, inject, signal, computed } from '@angular/core';
 import { TodosRepository } from '../ports/todos.repository';
-import { Todo, TodoId, TodoStatus, TodoPriority } from '../models/todo.model';
+import { Todo, TodoId } from '../models/todo.model';
+import { toObservable } from '@angular/core/rxjs-interop';
 
-export type Filter = 'all' | 'pending' | 'done';
-export type SortMode = 'created' | 'priority';
+export interface TodoView extends Todo {
+  __edit?: boolean;
+  __dragging?: boolean;
+}
 
 @Injectable({ providedIn: 'root' })
 export class TodoService {
-  private repo = inject(TodosRepository) as TodosRepository;
+  private repo = inject(TodosRepository);
 
-  readonly todos$: Observable<Todo[]> = this.repo.list();
+  private todos = signal<Todo[]>([]);
+  readonly todos$ = toObservable(this.todos);
 
-  private filter$ = new BehaviorSubject<Filter>('all');
-  private search$ = new BehaviorSubject<string>('');
-  private sort$ = new BehaviorSubject<SortMode>('created');
+  private filter = signal<'all' | 'pending' | 'done'>('all');
+  private search = signal('');
+  private sort = signal<'created' | 'priority'>('created');
 
-  readonly view$ = combineLatest<[Todo[], Filter, string, SortMode]>([
-    this.todos$,
-    this.filter$,
-    this.search$,
-    this.sort$,
-  ]).pipe(
-    map(([todos, filter, search, sort]) => {
-      let res = todos.slice();
+  readonly view = computed<TodoView[]>(() => {
+    let res: TodoView[] = [...this.todos()] as TodoView[];
 
-      if (filter !== 'all') {
-        res = res.filter((t) =>
-          filter === 'done'
-            ? t.status === TodoStatus.DONE
-            : t.status === TodoStatus.PENDING
-        );
-      }
-      if (search.trim()) {
-        const s = search.toLowerCase();
-        res = res.filter(
-          (t) =>
-            t.title.toLowerCase().includes(s) ||
-            (t.notes ?? '').toLowerCase().includes(s)
-        );
-      }
-      if (sort === 'priority') {
-        const rank = { HIGH: 0, MEDIUM: 1, LOW: 2 } as const;
-        res.sort(
-          (a, b) => rank[a.priority ?? 'LOW'] - rank[b.priority ?? 'LOW']
-        );
-      } else {
-        res.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-      }
-      return res;
-    })
-  );
+    const filter = this.filter();
+    const search = this.search().trim().toLowerCase();
+    const sort = this.sort();
 
-  setFilter(f: Filter) {
-    this.filter$.next(f);
+    // filtro done (boolean)
+    if (filter !== 'all') {
+      res = res.filter((t) => (filter === 'done' ? t.done === true : !t.done));
+    }
+
+    if (search) {
+      res = res.filter((t) => t.title.toLowerCase().includes(search));
+    }
+
+    if (sort === 'priority') {
+      res.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
+    } else {
+      res.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    }
+
+    return res;
+  });
+
+  readonly view$ = toObservable(this.view);
+
+  constructor() {
+    this.refresh();
   }
+
+  refresh() {
+    this.repo.list().subscribe((todos) => this.todos.set(todos));
+  }
+
+  setFilter(f: 'all' | 'pending' | 'done') {
+    this.filter.set(f);
+  }
+
   setSearch(q: string) {
-    this.search$.next(q);
+    this.search.set(q);
   }
-  setSort(s: SortMode) {
-    this.sort$.next(s);
+
+  setSort(s: 'created' | 'priority') {
+    this.sort.set(s);
   }
 
   add(title: string) {
-    return this.repo.add({ title });
+    this.repo.add({ title }).subscribe(() => this.refresh());
   }
+
   toggle(id: TodoId, done: boolean) {
-    return this.repo.update({
-      id,
-      status: done ? TodoStatus.DONE : TodoStatus.PENDING,
-    });
+    this.repo.update({ id, done }).subscribe(() => this.refresh());
   }
+
   rename(id: TodoId, title: string) {
-    return this.repo.update({ id, title });
+    this.repo.update({ id, title }).subscribe(() => this.refresh());
   }
+
   remove(id: TodoId) {
-    return this.repo.remove(id);
+    this.repo.remove(id).subscribe(() => this.refresh());
   }
+
   clearCompleted() {
-    return this.repo.clearCompleted();
+    this.repo.clearCompleted().subscribe(() => this.refresh());
   }
+
   reorder(ids: TodoId[]) {
-    return this.repo.reorder(ids);
+    this.repo.reorder(ids).subscribe(() => this.refresh());
   }
 }

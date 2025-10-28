@@ -23,7 +23,7 @@ export class HttpTodosRepository implements TodosRepository {
     return this.http.delete<void>(`${this.base}/${id}`);
   }
   clearCompleted() {
-    return this.http.post<void>(`${this.base}/clear-completed`, {});
+    return this.http.delete<void>(`${this.base}/clear-completed`, {});
   }
   reorder(ids: TodoId[]) {
     return this.http.post<Todo[]>(`${this.base}/reorder`, { ids });
