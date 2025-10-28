@@ -14,43 +14,43 @@
 
 ## 📦 Estrutura do Projeto
 
+```
 todo-brutal/
-├── todo-brutal-frontend/ # Frontend em Angular 19
-│ ├── src/
-│ ├── package.json
-│ ├── angular.json
-│ └── ...
+├── todo-brutal-frontend/     # Frontend em Angular 19
+│   ├── src/
+│   ├── package.json
+│   ├── angular.json
+│   └── ...
 │
-├── todo-brutal-backend/ # Backend em NestJS + TypeORM + PostgreSQL
-│ ├── src/
-│ ├── ormconfig.ts
-│ ├── package.json
-│ └── ...
+├── todo-brutal-backend/      # Backend em NestJS + TypeORM + PostgreSQL
+│   ├── src/
+│   ├── ormconfig.ts
+│   ├── package.json
+│   └── ...
 │
-├── package.json # Scripts unificados (opcional)
+├── package.json              # Scripts unificados (opcional)
 └── README.md
+```
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
 ### 🖥️ **Frontend**
-
-- **Angular 19 (Standalone Components + Signals)**
-- **RxJS 7+**
-- **TailwindCSS / SCSS**
-- **Angular CDK (Drag & Drop)**
-- **Arquitetura baseada em Services e Repositories**
-- **Design System Brutalista**
+- Angular 19 (Standalone Components + Signals)
+- RxJS 7+
+- TailwindCSS / SCSS
+- Angular CDK (Drag & Drop)
+- Arquitetura baseada em Services e Repositories
+- Design System Brutalista
 
 ### ⚙️ **Backend**
-
-- **NestJS 10**
-- **TypeORM**
-- **PostgreSQL**
-- **DTOs com class-validator / class-transformer**
-- **Arquitetura modular (TodosModule)**
-- **Boas práticas REST**
+- NestJS 10
+- TypeORM
+- PostgreSQL
+- DTOs com class-validator / class-transformer
+- Arquitetura modular (TodosModule)
+- Boas práticas REST
 
 ---
 
@@ -63,97 +63,134 @@ git clone https://github.com/SEU_USUARIO/todo-brutal.git
 cd todo-brutal
 ```
 
-2️⃣ Instale as dependências
+---
 
-Frontend
+### 2️⃣ Instale as dependências
+
+#### Frontend
+```bash
 cd todo-brutal-frontend
 npm install
+```
 
-Backend
+#### Backend
+```bash
 cd ../todo-brutal-backend
 npm install
+```
 
-3️⃣ Configure o banco de dados (PostgreSQL)
-Crie um banco chamado todo_brutal e configure suas credenciais no arquivo:
+---
 
+### 3️⃣ Configure o banco de dados (PostgreSQL)
+
+Crie um banco chamado `todo_brutal` e configure suas credenciais no arquivo:
+
+```
 todo-brutal-backend/.env
+```
 
+```env
 DATABASE_HOST=localhost
 DATABASE_PORT=5432
 DATABASE_USER=postgres
 DATABASE_PASS=postgres
 DATABASE_NAME=todo_brutal
+```
 
-4️⃣ Rode os servidores
+---
 
-Backend
+### 4️⃣ Rode os servidores
+
+#### Backend
+```bash
 cd todo-brutal-backend
 npm run start:dev
+```
+Servidor: **http://localhost:3000/api**
 
-Servidor: http://localhost:3000/api
-
-Frontend
+#### Frontend
+```bash
 cd ../todo-brutal-frontend
 npm run start
+```
+Aplicação: **http://localhost:4200**
 
-Aplicação: http://localhost:4200
+---
 
-💡 Dica: rodar os dois ao mesmo tempo
+### 💡 Dica: rodar os dois ao mesmo tempo
 
-Na raiz do projeto (todo-brutal/), crie um package.json com:
+Na raiz do projeto (`todo-brutal/`), crie um `package.json` com:
 
+```json
 {
-"private": true,
-"scripts": {
-"start:frontend": "cd todo-brutal-frontend && npm start",
-"start:backend": "cd todo-brutal-backend && npm run start:dev",
-"dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
-},
-"devDependencies": {
-"concurrently": "^9.0.0"
+  "private": true,
+  "scripts": {
+    "start:frontend": "cd todo-brutal-frontend && npm start",
+    "start:backend": "cd todo-brutal-backend && npm run start:dev",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
 }
-}
+```
 
 Agora é só rodar:
+
+```bash
 npm run dev
+```
 
-🧠 Funcionalidades
+---
 
-✅ Criar tarefas
-✅ Editar título da tarefa
-✅ Marcar como concluída
-✅ Reordenar tarefas (Drag & Drop)
-✅ Buscar, filtrar e ordenar
-✅ Alternar entre tema claro/escuro
-✅ Excluir tarefas concluídas
-✅ Persistência completa no PostgreSQL
+## 🧠 Funcionalidades
 
-🧰 Endpoints Principais (API REST)
-Método Endpoint Descrição
-GET /api/todos Lista todas as tarefas
-GET /api/todos/:id Retorna uma tarefa
-POST /api/todos Cria uma nova tarefa
-PATCH /api/todos/:id Atualiza uma tarefa
-DELETE /api/todos/:id Remove uma tarefa
-DELETE /api/todos/clear-completed Remove todas as concluídas ✅
+✅ Criar tarefas  
+✅ Editar título da tarefa  
+✅ Marcar como concluída  
+✅ Reordenar tarefas (Drag & Drop)  
+✅ Buscar, filtrar e ordenar  
+✅ Alternar entre tema claro/escuro  
+✅ Excluir tarefas concluídas  
+✅ Persistência completa no PostgreSQL  
 
-🧪 Comandos Úteis
-Ação Comando
-Rodar o front npm start
-Rodar o back npm run start:dev
-Build do front npm run build
-Build do back npm run build
-Lint (Angular) npm run lint
-Testes (Nest) npm run test
+---
 
-🧑‍💻 Autor
+## 🧰 Endpoints Principais (API REST)
 
-Aderbal Cavalcante
-Desenvolvedor Full Stack e Militar 🇧🇷
-GitHub
-• LinkedIn
+| Método | Endpoint | Descrição |
+|---------|-----------|-----------|
+| `GET` | `/api/todos` | Lista todas as tarefas |
+| `GET` | `/api/todos/:id` | Retorna uma tarefa |
+| `POST` | `/api/todos` | Cria uma nova tarefa |
+| `PATCH` | `/api/todos/:id` | Atualiza uma tarefa |
+| `DELETE` | `/api/todos/:id` | Remove uma tarefa |
+| `DELETE` | `/api/todos/clear-completed` | Remove todas as concluídas ✅ |
 
-📜 Licença
+---
 
-Este projeto está sob a licença MIT — sinta-se livre para usar e modificar.
-Feito com 💻 + ☕ + 🧠 por Aderbal Cavalcante.
+## 🧪 Comandos Úteis
+
+| Ação | Comando |
+|------|----------|
+| Rodar o front | `npm start` |
+| Rodar o back | `npm run start:dev` |
+| Build do front | `npm run build` |
+| Build do back | `npm run build` |
+| Lint (Angular) | `npm run lint` |
+| Testes (Nest) | `npm run test` |
+
+---
+
+## 🧑‍💻 Autor
+
+**Aderbal Cavalcante**  
+Desenvolvedor Full Stack e Militar 🇧🇷  
+[GitHub](https://github.com/oadcavalcante) • [LinkedIn](https://linkedin.com/in/oadcavalcante)
+
+---
+
+## 📜 Licença
+
+Este projeto está sob a licença **MIT** — sinta-se livre para usar e modificar.  
+Feito com 💻 + ☕ + 🧠 por **Aderbal Cavalcante**.
