@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "todo-brutal": {
+    "to-do-brutal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/todo-brutal",
+            "outputPath": "dist/to-do-brutal",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "todo-brutal:build:production"
+              "buildTarget": "to-do-brutal:build:production"
             },
             "development": {
-              "buildTarget": "todo-brutal:build:development"
+              "buildTarget": "to-do-brutal:build:development"
             }
           },
           "defaultConfiguration": "development"
