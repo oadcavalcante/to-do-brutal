@@ -1,4 +1,4 @@
-<h1 align="center">🧠 TODO BRUTAL</h1>
+<h1 align="center">🧠 TO-DO BRUTALIST</h1>
 <p align="center">
   <strong>Aplicação Full Stack com Angular 19 + NestJS + PostgreSQL</strong><br/>
   Design Brutalista • CRUD Completo • Estrutura Monorepo
@@ -161,4 +161,5 @@ Desenvolvedor Full Stack e Militar 🇧🇷
 
 Este projeto está sob a licença **MIT** — sinta-se livre para usar e modificar.  
 Feito com 💻 + ☕ + 🧠 por **Aderbal Cavalcante**.
+
 
