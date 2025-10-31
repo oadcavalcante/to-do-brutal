@@ -15,14 +15,14 @@
 ## 📦 Estrutura do Projeto
 
 ```
-todo-brutal/
-├── todo-brutal-frontend/     # Frontend em Angular 19
+to-do-brutal/
+├── frontend/     # Frontend em Angular 19
 │   ├── src/
 │   ├── package.json
 │   ├── angular.json
 │   └── ...
 │
-├── todo-brutal-backend/      # Backend em NestJS + TypeORM + PostgreSQL
+├── backend/      # Backend em NestJS + TypeORM + PostgreSQL
 │   ├── src/
 │   ├── package.json
 │   └── ...
@@ -60,8 +60,8 @@ todo-brutal/
 ### 1️⃣ Clone o repositório
 
 ```bash
-git clone https://github.com/SEU_USUARIO/todo-brutal.git
-cd todo-brutal
+git clone https://github.com/SEU_USUARIO/to-do-brutal.git
+cd to-do-brutal
 ```
 
 ---
@@ -81,7 +81,7 @@ npm run install:all
 Crie um banco chamado `todo_brutal` e configure suas credenciais no arquivo:
 
 ```
-todo-brutal-backend/.env
+to-do-brutal-backend/.env
 ```
 
 ```env
@@ -161,3 +161,4 @@ Desenvolvedor Full Stack e Militar 🇧🇷
 
 Este projeto está sob a licença **MIT** — sinta-se livre para usar e modificar.  
 Feito com 💻 + ☕ + 🧠 por **Aderbal Cavalcante**.
+
