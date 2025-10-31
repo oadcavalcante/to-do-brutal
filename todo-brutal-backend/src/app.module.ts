@@ -11,7 +11,7 @@ import { TodosModule } from './todos/todos.module';
       host: process.env.DATABASE_HOST ?? 'localhost',
       port: parseInt(process.env.DATABASE_PORT ?? '5432', 10),
       username: process.env.DATABASE_USER ?? 'postgres',
-      password: process.env.DATABASE_PASSWORD ?? 'postgres',
+      password: process.env.DATABASE_PASSWORD ?? 'root',
       database: process.env.DATABASE_NAME ?? 'todo_brutal',
       autoLoadEntities: true,
       synchronize: true, // desative em produção
