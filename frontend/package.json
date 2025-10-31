@@ -5,7 +5,7 @@
     "start": "ng serve",
     "start:prod": "ng serve --configuration production",
     "build": "ng build --configuration development",
-    "build:prod": "ng build --configuration production --base-href /todo-brutal/",
+    "build:prod": "ng build --configuration production --base-href /to-do-brutal/",
     "spa:404": "node -e \"const fs=require('fs');fs.copyFileSync('dist/todo-brutal/browser/index.html','dist/todo-brutal/browser/404.html');\"",
     "ghpages": "npx angular-cli-ghpages --dir=dist/todo-brutal/browser",
     "deploy": "npm run build:prod && npm run spa:404 && npm run ghpages",
