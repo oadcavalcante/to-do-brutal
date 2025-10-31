@@ -24,7 +24,6 @@ todo-brutal/
 │
 ├── todo-brutal-backend/      # Backend em NestJS + TypeORM + PostgreSQL
 │   ├── src/
-│   ├── ormconfig.ts
 │   ├── package.json
 │   └── ...
 │
@@ -37,6 +36,7 @@ todo-brutal/
 ## 🚀 Tecnologias Utilizadas
 
 ### 🖥️ **Frontend**
+
 - Angular 19 (Standalone Components + Signals)
 - RxJS 7+
 - TailwindCSS / SCSS
@@ -45,6 +45,7 @@ todo-brutal/
 - Design System Brutalista
 
 ### ⚙️ **Backend**
+
 - NestJS 10
 - TypeORM
 - PostgreSQL
@@ -65,18 +66,12 @@ cd todo-brutal
 
 ---
 
-### 2️⃣ Instale as dependências
+### 2️⃣ Instale as dependências de todo o projeto
 
-#### Frontend
-```bash
-cd todo-brutal-frontend
-npm install
-```
+Com um único comando na raiz:
 
-#### Backend
 ```bash
-cd ../todo-brutal-backend
-npm install
+npm run install:all
 ```
 
 ---
@@ -93,53 +88,25 @@ todo-brutal-backend/.env
 DATABASE_HOST=localhost
 DATABASE_PORT=5432
 DATABASE_USER=postgres
-DATABASE_PASS=postgres
+DATABASE_PASS=root
 DATABASE_NAME=todo_brutal
 ```
 
 ---
 
-### 4️⃣ Rode os servidores
+### 4️⃣ Inicie a aplicação completa (Front + Back)
 
-#### Backend
-```bash
-cd todo-brutal-backend
-npm run start:dev
-```
-Servidor: **http://localhost:3000/api**
-
-#### Frontend
-```bash
-cd ../todo-brutal-frontend
-npm run start
-```
-Aplicação: **http://localhost:4200**
-
----
-
-### 💡 Dica: rodar os dois ao mesmo tempo
-
-Na raiz do projeto (`todo-brutal/`), crie um `package.json` com:
-
-```json
-{
-  "private": true,
-  "scripts": {
-    "start:frontend": "cd todo-brutal-frontend && npm start",
-    "start:backend": "cd todo-brutal-backend && npm run start:dev",
-    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
-  },
-  "devDependencies": {
-    "concurrently": "^9.0.0"
-  }
-}
-```
-
-Agora é só rodar:
+Na raiz do projeto, execute:
 
 ```bash
-npm run dev
+npm start
+
 ```
+
+Isso executa simultaneamente:
+
+- Frontend → http://localhost:4200
+- Backend → http://localhost:3000/api
 
 ---
 
@@ -152,33 +119,33 @@ npm run dev
 ✅ Buscar, filtrar e ordenar  
 ✅ Alternar entre tema claro/escuro  
 ✅ Excluir tarefas concluídas  
-✅ Persistência completa no PostgreSQL  
+✅ Persistência completa no PostgreSQL
 
 ---
 
 ## 🧰 Endpoints Principais (API REST)
 
-| Método | Endpoint | Descrição |
-|---------|-----------|-----------|
-| `GET` | `/api/todos` | Lista todas as tarefas |
-| `GET` | `/api/todos/:id` | Retorna uma tarefa |
-| `POST` | `/api/todos` | Cria uma nova tarefa |
-| `PATCH` | `/api/todos/:id` | Atualiza uma tarefa |
-| `DELETE` | `/api/todos/:id` | Remove uma tarefa |
+| Método   | Endpoint                     | Descrição                     |
+| -------- | ---------------------------- | ----------------------------- |
+| `GET`    | `/api/todos`                 | Lista todas as tarefas        |
+| `GET`    | `/api/todos/:id`             | Retorna uma tarefa            |
+| `POST`   | `/api/todos`                 | Cria uma nova tarefa          |
+| `PATCH`  | `/api/todos/:id`             | Atualiza uma tarefa           |
+| `DELETE` | `/api/todos/:id`             | Remove uma tarefa             |
 | `DELETE` | `/api/todos/clear-completed` | Remove todas as concluídas ✅ |
 
 ---
 
 ## 🧪 Comandos Úteis
 
-| Ação | Comando |
-|------|----------|
-| Rodar o front | `npm start` |
-| Rodar o back | `npm run start:dev` |
-| Build do front | `npm run build` |
-| Build do back | `npm run build` |
-| Lint (Angular) | `npm run lint` |
-| Testes (Nest) | `npm run test` |
+| Ação           | Comando             |
+| -------------- | ------------------- |
+| Rodar o front  | `npm start`         |
+| Rodar o back   | `npm run start:dev` |
+| Build do front | `npm run build`     |
+| Build do back  | `npm run build`     |
+| Lint (Angular) | `npm run lint`      |
+| Testes (Nest)  | `npm run test`      |
 
 ---
 
