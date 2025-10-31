@@ -5,9 +5,9 @@
     "start": "ng serve",
     "start:prod": "ng serve --configuration production",
     "build": "ng build --configuration development",
-    "build:prod": "ng build --configuration production --base-href /to-do-brutal/",
-    "spa:404": "node -e \"const fs=require('fs');fs.copyFileSync('dist/todo-brutal/browser/index.html','dist/todo-brutal/browser/404.html');\"",
-    "ghpages": "npx angular-cli-ghpages --dir=dist/todo-brutal/browser",
+    "build:prod": "node -e \"const name=require('./package.json').name; require('child_process').execSync(`ng build --configuration production --base-href /${name}/`, {stdio: 'inherit'});\"",
+    "spa:404": "node -e \"const fs=require('fs'), name=require('./package.json').name; fs.copyFileSync(`dist/${name}/browser/index.html`, `dist/${name}/browser/404.html`);\"",
+    "ghpages": "node -e \"const name=require('./package.json').name; require('child_process').execSync(`npx angular-cli-ghpages --dir=dist/${name}/browser`, {stdio: 'inherit'});\"",
     "deploy": "npm run build:prod && npm run spa:404 && npm run ghpages",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
