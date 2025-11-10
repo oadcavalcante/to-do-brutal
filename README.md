@@ -60,7 +60,7 @@ to-do-brutal/
 ### 1️⃣ Clone o repositório
 
 ```bash
-git clone https://github.com/SEU_USUARIO/to-do-brutal.git
+git clone https://github.com/oadcavalcante/to-do-brutal.git
 cd to-do-brutal
 ```
 
@@ -161,5 +161,6 @@ Desenvolvedor Full Stack e Militar 🇧🇷
 
 Este projeto está sob a licença **MIT** — sinta-se livre para usar e modificar.  
 Feito com 💻 + ☕ + 🧠 por **Aderbal Cavalcante**.
+
 
 
