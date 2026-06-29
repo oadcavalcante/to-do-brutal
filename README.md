@@ -1,14 +1,58 @@
-<h1 align="center">🧠 TO-DO BRUTALIST</h1>
-<p align="center">
-  <strong>Aplicação Full Stack com Angular 19 + NestJS + PostgreSQL</strong><br/>
-  Design Brutalista • CRUD Completo • Estrutura Monorepo
-</p>
+<div align="center">
 
-<p align="center">
-  <img src="https://img.shields.io/badge/angular-19-red?style=for-the-badge&logo=angular" alt="Angular"/>
-  <img src="https://img.shields.io/badge/nestjs-10-E0234E?style=for-the-badge&logo=nestjs" alt="NestJS"/>
-  <img src="https://img.shields.io/badge/postgresql-15-blue?style=for-the-badge&logo=postgresql" alt="PostgreSQL"/>
-</p>
+<img src="frontend/public/Logo.png" width="120" alt="To-Do Brutal" />
+
+# To-Do Brutal
+
+**To-do list full stack com design brutalista, Angular 19 no front e NestJS com PostgreSQL no back.**
+
+<br />
+
+[![Repositório público](https://img.shields.io/badge/repo-público-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/oadcavalcante/to-do-brutal)
+
+<br />
+
+[![Angular 19](https://img.shields.io/badge/Angular-DD0031?style=flat-square&logoColor=fff&logo=angular)](https://github.com/oadcavalcante/to-do-brutal)
+
+[![NestJS 11](https://img.shields.io/badge/NestJS-E0234E?style=flat-square&logoColor=fff&logo=nestjs)](https://github.com/oadcavalcante/to-do-brutal)
+
+[![TypeORM](https://img.shields.io/badge/TypeORM-FE0902?style=flat-square&logoColor=fff&logo=typeorm)](https://github.com/oadcavalcante/to-do-brutal) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logoColor=fff&logo=postgresql)](https://github.com/oadcavalcante/to-do-brutal)
+
+[![RxJS](https://img.shields.io/badge/RxJS-B7178C?style=flat-square&logoColor=fff&logo=reactivex)](https://github.com/oadcavalcante/to-do-brutal) [![class-validator](https://img.shields.io/badge/class_validator-555555?style=flat-square)](https://github.com/oadcavalcante/to-do-brutal) [![class-transformer](https://img.shields.io/badge/class_transformer-555555?style=flat-square)](https://github.com/oadcavalcante/to-do-brutal) [![Concurrently](https://img.shields.io/badge/Concurrently-555555?style=flat-square)](https://github.com/oadcavalcante/to-do-brutal) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logoColor=fff&logo=typescript)](https://github.com/oadcavalcante/to-do-brutal)
+
+<br />
+
+[Stack completa ↓](#stack)
+
+<br />
+
+[Documentação](https://github.com/oadcavalcante/to-do-brutal/blob/main/README.md) · [Deploy](#deploy) · [API](http://localhost:3000/api/todos) · [Issues](https://github.com/oadcavalcante/to-do-brutal/issues)
+
+</div>
+
+## Features
+
+- ✨ CRUD completo de tarefas com API REST
+- 🚀 Drag and drop para reordenar tarefas
+- ⚡ Busca, filtro e ordenação de tarefas
+- 🎯 Tema claro e escuro
+- 🔧 Persistência em PostgreSQL via TypeORM
+- 📦 Monorepo com scripts unificados na raiz
+
+## Getting Started
+
+| Ambiente | Comando / Link |
+|----------|----------------|
+| Primeira vez | `npm run install:all` |
+| Documentação | [README](https://github.com/oadcavalcante/to-do-brutal/blob/main/README.md) |
+| Produção | N/A |
+
+## Stack
+
+- **Frontend:** Angular 19
+- **Backend:** NestJS 11
+- **Dados:** TypeORM, PostgreSQL
+- **Outros:** RxJS, class-validator, class-transformer, Concurrently, TypeScript
 
 ---
 
@@ -161,6 +205,3 @@ Desenvolvedor Full Stack e Militar 🇧🇷
 
 Este projeto está sob a licença **MIT** — sinta-se livre para usar e modificar.  
 Feito com 💻 + ☕ + 🧠 por **Aderbal Cavalcante**.
-
-
-
